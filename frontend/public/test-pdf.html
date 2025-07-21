@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF.js Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.js"></script>
+</head>
+<body>
+    <h1>PDF.js Test Page</h1>
+    <div>
+        <button onclick="testPDFLoad()">Test PDF Loading</button>
+        <div id="status">Click button to test PDF loading...</div>
+        <canvas id="pdf-canvas" style="border: 1px solid black;"></canvas>
+    </div>
+
+    <script>
+        // Set worker (local file)
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
+        
+        async function testPDFLoad() {
+            const statusDiv = document.getElementById('status');
+            const canvas = document.getElementById('pdf-canvas');
+            
+            try {
+                statusDiv.innerHTML = 'Testing PDF.js worker...';
+                
+                // Test with API data
+                const response = await fetch('/api/student/1');
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error('Failed to get student data: ' + data.error);
+                }
+                
+                statusDiv.innerHTML = `Got PDF data: ${data.pdfData.length} chars. Converting...`;
+                
+                // Convert base64 to binary
+                const binaryStr = atob(data.pdfData);
+                const bytes = new Uint8Array(binaryStr.length);
+                for (let i = 0; i < binaryStr.length; i++) {
+                    bytes[i] = binaryStr.charCodeAt(i);
+                }
+                
+                statusDiv.innerHTML = `Converted to ${bytes.length} bytes. Loading PDF...`;
+                
+                // Load PDF
+                const loadingTask = pdfjsLib.getDocument({ data: bytes });
+                const pdfDoc = await loadingTask.promise;
+                
+                statusDiv.innerHTML = `PDF loaded! ${pdfDoc.numPages} pages. Rendering first page...`;
+                
+                // Render first page
+                const page = await pdfDoc.getPage(1);
+                const viewport = page.getViewport({ scale: 1.0 });
+                
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                
+                const context = canvas.getContext('2d');
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                
+                await page.render(renderContext).promise;
+                statusDiv.innerHTML = `✅ Success! PDF rendered successfully!`;
+                
+            } catch (error) {
+                statusDiv.innerHTML = `❌ Error: ${error.message}`;
+                console.error('PDF test error:', error);
+            }
+        }
+    </script>
+</body>
+</html> 
