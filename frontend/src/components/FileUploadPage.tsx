@@ -21,6 +21,7 @@ interface FileUploadPageProps {
 const FileUploadPage: React.FC<FileUploadPageProps> = ({ onUploadComplete }) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [error, setError] = useState<string>('');
 
   const handleFileSelect = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,9 +45,13 @@ const FileUploadPage: React.FC<FileUploadPageProps> = ({ onUploadComplete }) => 
     }
 
     setIsUploading(true);
+    setUploadProgress(0);
     setError('');
 
     try {
+      const totalSize = selectedFiles.reduce((sum, file) => sum + file.size, 0);
+      console.log(`Starting upload of ${selectedFiles.length} files, total size: ${(totalSize / 1024 / 1024).toFixed(2)}MB`);
+
       const formData = new FormData();
       selectedFiles.forEach(file => {
         formData.append('pdfs', file);
@@ -57,18 +62,28 @@ const FileUploadPage: React.FC<FileUploadPageProps> = ({ onUploadComplete }) => 
         body: formData
       });
 
+      if (!response.ok) {
+        const errorResult = await response.json();
+        throw new Error(errorResult.error || 'Upload failed');
+      }
+
       const result = await response.json();
       
       if (result.success) {
-        onUploadComplete(result.totalStudents);
+        setUploadProgress(100);
+        console.log(`Upload completed: ${result.totalStudents} students processed`);
+        setTimeout(() => onUploadComplete(result.totalStudents), 500); // Small delay to show 100% progress
       } else {
         setError(result.error || 'Upload failed');
       }
     } catch (error) {
       console.error('Upload error:', error);
-      setError('Failed to upload files. Please try again.');
+      setError(error instanceof Error ? error.message : 'Failed to upload files. Please try again.');
     } finally {
-      setIsUploading(false);
+      setTimeout(() => {
+        setIsUploading(false);
+        setUploadProgress(0);
+      }, 500);
     }
   };
 
@@ -154,7 +169,7 @@ const FileUploadPage: React.FC<FileUploadPageProps> = ({ onUploadComplete }) => 
               {isUploading ? (
                 <>
                   <CircularProgress size={20} sx={{ mr: 1 }} />
-                  Uploading...
+                  {uploadProgress > 0 ? `Processing... ${uploadProgress}%` : 'Uploading...'}
                 </>
               ) : (
                 'Start Sorting Process'

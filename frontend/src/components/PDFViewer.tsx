@@ -9,8 +9,9 @@ interface PDFViewerProps {
   totalPages: number;
   onPageChange: (page: number) => void;
   onTotalPagesChange?: (totalPages: number) => void; // New prop to communicate total pages
-  pageLabels: { [pageNumber: number]: number };
+  pageLabels: { [pageNumber: number]: number[] };
   onPageLabel: (pageNumber: number, problemNumber: number) => void;
+  onRemovePageLabel: (pageNumber: number, problemNumber: number) => void;
   scale: number;
   onScaleChange: (scale: number) => void;
 }
@@ -23,6 +24,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
   onTotalPagesChange,
   pageLabels,
   onPageLabel,
+  onRemovePageLabel,
   scale,
   onScaleChange
 }) => {
@@ -69,7 +71,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
     if (pdfData) {
       loadPDF();
     }
-  }, [pdfData, totalPages, onTotalPagesChange]);
+  }, [pdfData, onTotalPagesChange]); // Removed totalPages dependency to avoid infinite loops
 
   useEffect(() => {
     const renderPage = async () => {
@@ -102,7 +104,11 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
       }
     };
 
-    renderPage();
+    // Add a small delay to ensure PDF is fully loaded before rendering
+    if (pdfDoc) {
+      const timer = setTimeout(renderPage, 50);
+      return () => clearTimeout(timer);
+    }
   }, [pdfDoc, currentPage, scale]);
 
   const handlePrevPage = () => {
@@ -154,8 +160,9 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
     );
   }
 
-  const currentProblem = pageLabels[currentPage];
+  const currentProblems = pageLabels[currentPage] || [];
   const actualTotalPages = pdfDoc?.numPages || totalPages;
+  const NOT_A_PROBLEM = -1;
 
   return (
     <Box>
@@ -221,16 +228,25 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
           </IconButton>
         </Box>
 
-        {currentProblem && (
-          <Chip
-            label={`Problem ${currentProblem}`}
-            sx={{
-              backgroundColor: '#6366f1',
-              color: 'white',
-              fontWeight: 500
-            }}
-            variant="filled"
-          />
+        {currentProblems.length > 0 && (
+          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+            {currentProblems.map((problemNum) => (
+              <Chip
+                key={problemNum}
+                label={problemNum === NOT_A_PROBLEM ? 'Not a problem' : `Problem ${problemNum}`}
+                sx={{
+                  backgroundColor: problemNum === NOT_A_PROBLEM ? '#6b7280' : '#6366f1',
+                  color: 'white',
+                  fontWeight: 500
+                }}
+                variant="filled"
+                onDelete={() => onRemovePageLabel(currentPage, problemNum)}
+                deleteIcon={
+                  <Box sx={{ color: 'white', fontSize: '16px', fontWeight: 'bold' }}>×</Box>
+                }
+              />
+            ))}
+          </Box>
         )}
       </Paper>
 
@@ -253,6 +269,8 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
             borderRadius: '8px',
             maxWidth: '100%',
             height: 'auto',
+            transform: `scale(${scale})`,
+            transformOrigin: 'top left',
             objectFit: 'contain',
             boxShadow: '0 4px 12px 0 rgb(0 0 0 / 0.05)'
           }} 
