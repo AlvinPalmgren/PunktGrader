@@ -1,6 +1,6 @@
 # Exam Grader
 
-A web application for efficiently grading exams by converting student PDFs into problem-organized PDFs.
+A web application for efficiently grading exams by converting student PDFs into problem-organized PDFs. Note that this was put together quickly using mostly AI coding, so the code quality is probably poor.
 
 ## Quick Start
 
@@ -34,4 +34,12 @@ A web application for efficiently grading exams by converting student PDFs into 
 ├── frontend/          # React TypeScript frontend
 ├── backend/           # Node.js Express backend
 └── package.json       # Root package.json for development
-``` 
+```
+
+## TODO
+Some potential changes:
+- Find problem number using AI. ChatGPT is quite good at this, but a human will probably need to check anyways.
+
+Feel free to work on these and make a pull request.
+
+## 
