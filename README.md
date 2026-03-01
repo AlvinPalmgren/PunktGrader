@@ -2,6 +2,8 @@
 
 A web application for efficiently grading exams by converting student PDFs into problem-organized PDFs. Note that this was put together quickly using mostly AI coding, so the code quality is probably poor.
 
+NOTE: Entering student names containing emojis will cause issues, so please avoid this.
+
 ## Quick Start
 
 1. Install dependencies for all projects:
