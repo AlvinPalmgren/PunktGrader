@@ -117,7 +117,8 @@ const FileUploadPage: React.FC<FileUploadPageProps> = ({ onUploadComplete }) => 
           variant="contained"
           component="label"
           size="large"
-          sx={{ 
+          aria-hidden="true"
+          sx={{
             mb: 3,
             py: 1.5,
             px: 4,
