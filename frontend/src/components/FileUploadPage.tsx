@@ -10,9 +10,11 @@ import {
   CircularProgress,
   Alert,
   Card,
-  CardContent
+  CardContent,
+  Tooltip
 } from '@mui/material';
-import { CloudUpload, Description } from '@mui/icons-material';
+import { CloudUpload, Description, AutoAwesome } from '@mui/icons-material';
+import styles from './FileUploadPage.module.css';
 
 interface FileUploadPageProps {
   onUploadComplete: (totalStudents: number) => void;
