@@ -105,21 +105,24 @@ const FileUploadPage: React.FC<FileUploadPageProps> = ({ onUploadComplete }) => 
 
       <Box sx={{ textAlign: 'center', mb: 4 }}>
         <Tooltip title="This button is just here to look pretty" arrow>
-          <Button
-            variant="contained"
-            size="large"
-            startIcon={<AutoAwesome />}
-            onClick={() => {}}
-            className={styles.decorativeButton}
-            sx={{
-              py: 1.5,
-              px: 4,
-              background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-              '&:hover': {
-                background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
-              },
-            }}
-          />
+          <span aria-hidden="true">
+            <Button
+              variant="contained"
+              size="large"
+              startIcon={<AutoAwesome />}
+              onClick={() => {}}
+              className={styles.decorativeButton}
+              tabIndex={-1}
+              sx={{
+                py: 1.5,
+                px: 4,
+                background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                '&:hover': {
+                  background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
+                },
+              }}
+            />
+          </span>
         </Tooltip>
       </Box>
 
