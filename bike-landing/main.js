@@ -122,6 +122,53 @@
     document.querySelectorAll("[data-reveal]").forEach((t) => t.classList.add("is-revealed"));
   }
 
+  /* ---------- Open / Closed indicator -----------
+     Hours match the JSON-LD + the visible text in the contact section.
+     Day index: 0=Sun, 1=Mon, ... 6=Sat. Hours are local time. */
+  const HOURS = {
+    1: null,            // Mon — closed
+    2: [9 * 60, 18 * 60], // Tue
+    3: [9 * 60, 18 * 60], // Wed
+    4: [9 * 60, 18 * 60], // Thu
+    5: [9 * 60, 18 * 60], // Fri
+    6: [9 * 60, 16 * 60], // Sat
+    0: null,            // Sun — closed
+  };
+
+  const fmt = (mins) =>
+    `${String(Math.floor(mins / 60)).padStart(2, "0")}:${String(mins % 60).padStart(2, "0")}`;
+
+  const updateOpenStatus = () => {
+    const badge = document.getElementById("open-status");
+    if (!badge) return;
+    const label = badge.querySelector(".open-status__label");
+    const now = new Date();
+    const todays = HOURS[now.getDay()];
+    const nowMin = now.getHours() * 60 + now.getMinutes();
+
+    badge.classList.remove("open-status--open", "open-status--closed", "open-status--unknown");
+
+    if (todays && nowMin >= todays[0] && nowMin < todays[1]) {
+      badge.classList.add("open-status--open");
+      label.textContent = `Open · until ${fmt(todays[1])}`;
+    } else {
+      badge.classList.add("open-status--closed");
+      // Find the next opening day (look up to 7 days ahead)
+      for (let i = 1; i <= 7; i++) {
+        const dow = (now.getDay() + i) % 7;
+        if (HOURS[dow]) {
+          const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+          label.textContent = `Closed · opens ${dayNames[dow]} ${fmt(HOURS[dow][0])}`;
+          return;
+        }
+      }
+      label.textContent = "Closed";
+    }
+  };
+
+  updateOpenStatus();
+  setInterval(updateOpenStatus, 60_000);
+
   /* ---------- Year in footer ---------- */
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();

@@ -396,6 +396,58 @@ summary:focus-visible {
   border-color: #c0392b;
 }
 
+/* ------- Open / Closed status badge ------- */
+.open-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.open-status__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: currentColor;
+  box-shadow: 0 0 0 0 currentColor;
+}
+
+.open-status--open {
+  background-color: rgba(72, 187, 120, 0.18);
+  color: #48bb78;
+}
+
+.open-status--open .open-status__dot {
+  animation: pulse 1.8s ease-out infinite;
+}
+
+.open-status--closed {
+  background-color: rgba(248, 244, 239, 0.12);
+  color: rgba(248, 244, 239, 0.7);
+}
+
+.open-status--unknown {
+  background-color: rgba(248, 244, 239, 0.08);
+  color: rgba(248, 244, 239, 0.5);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(72, 187, 120, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(72, 187, 120, 0);
+  }
+}
+
 /* ------- Footer ------- */
 .social-link {
   display: inline-flex;
