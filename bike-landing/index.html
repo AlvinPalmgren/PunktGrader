@@ -29,6 +29,15 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+
+    <!-- Preload the hero image so it lands as the LCP element fast -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=2000&q=80"
+      fetchpriority="high"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap"
       rel="stylesheet"
@@ -233,7 +242,7 @@
       </section>
 
       <!-- SERVICES -->
-      <section id="services" class="scroll-mt-24 py-24">
+      <section id="services" class="scroll-mt-24 py-24" data-reveal>
         <div class="mx-auto max-w-6xl px-6">
           <div class="mx-auto max-w-2xl text-center">
             <p class="text-sm font-semibold uppercase tracking-widest text-forest">What we do</p>
@@ -303,7 +312,7 @@
       </section>
 
       <!-- PRICING -->
-      <section id="pricing" class="scroll-mt-24 bg-white/60 py-24">
+      <section id="pricing" class="scroll-mt-24 bg-white/60 py-24" data-reveal>
         <div class="mx-auto max-w-6xl px-6">
           <div class="mx-auto max-w-2xl text-center">
             <p class="text-sm font-semibold uppercase tracking-widest text-forest">Service menu</p>
@@ -326,6 +335,11 @@
                 <li>Tyre pressure & bolt check</li>
                 <li>Wipe-down & lube</li>
               </ul>
+              <a
+                href="#contact"
+                class="pricing-card__cta"
+                data-book-tier="Quick Tune ($59)"
+              >Book Quick Tune</a>
             </article>
 
             <article class="pricing-card pricing-card--featured">
@@ -339,6 +353,11 @@
                 <li>Wheel true & hub check</li>
                 <li>Brake pad inspection</li>
               </ul>
+              <a
+                href="#contact"
+                class="pricing-card__cta pricing-card__cta--primary"
+                data-book-tier="Full Service ($149)"
+              >Book Full Service</a>
             </article>
 
             <article class="pricing-card">
@@ -351,6 +370,11 @@
                 <li>New cables & housing</li>
                 <li>Frame inspection</li>
               </ul>
+              <a
+                href="#contact"
+                class="pricing-card__cta"
+                data-book-tier="Overhaul ($299)"
+              >Book Overhaul</a>
             </article>
           </div>
 
@@ -361,7 +385,7 @@
       </section>
 
       <!-- ABOUT -->
-      <section id="about" class="scroll-mt-24 py-24">
+      <section id="about" class="scroll-mt-24 py-24" data-reveal>
         <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-2">
           <div>
             <p class="text-sm font-semibold uppercase tracking-widest text-forest">Our story</p>
@@ -406,7 +430,7 @@
       </section>
 
       <!-- TESTIMONIALS -->
-      <section id="testimonials" class="scroll-mt-24 py-24">
+      <section id="testimonials" class="scroll-mt-24 py-24" data-reveal>
         <div class="mx-auto max-w-6xl px-6">
           <div class="mx-auto max-w-2xl text-center">
             <p class="text-sm font-semibold uppercase tracking-widest text-forest">Rider stories</p>
@@ -456,7 +480,7 @@
       </section>
 
       <!-- FAQ -->
-      <section id="faq" class="scroll-mt-24 bg-white/60 py-24">
+      <section id="faq" class="scroll-mt-24 bg-white/60 py-24" data-reveal>
         <div class="mx-auto max-w-3xl px-6">
           <div class="text-center">
             <p class="text-sm font-semibold uppercase tracking-widest text-forest">Good to know</p>
@@ -511,7 +535,7 @@
       </section>
 
       <!-- CONTACT -->
-      <section id="contact" class="scroll-mt-24 bg-forest-dark py-24 text-cream">
+      <section id="contact" class="scroll-mt-24 bg-forest-dark py-24 text-cream" data-reveal>
         <div class="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2">
           <div>
             <p class="text-sm font-semibold uppercase tracking-widest text-amber">Get in touch</p>
@@ -602,7 +626,9 @@
                 <label for="service" class="form-label">What do you need?</label>
                 <select id="service" name="service" class="form-input" required>
                   <option value="" disabled selected>Choose a service…</option>
-                  <option>Tune-up / general service</option>
+                  <option>Quick Tune ($59)</option>
+                  <option>Full Service ($149)</option>
+                  <option>Overhaul ($299)</option>
                   <option>Repair (specific issue)</option>
                   <option>New bike enquiry</option>
                   <option>Custom build consult</option>

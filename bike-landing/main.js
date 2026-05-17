@@ -91,6 +91,37 @@
     form.reset();
   });
 
+  /* ---------- Pricing CTAs pre-fill the service dropdown ---------- */
+  document.querySelectorAll("[data-book-tier]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const tier = el.getAttribute("data-book-tier");
+      const select = /** @type {HTMLSelectElement|null} */ (document.getElementById("service"));
+      if (!select || !tier) return;
+      const match = Array.from(select.options).find((o) => o.value === tier || o.text === tier);
+      if (match) select.value = match.value || match.text;
+    });
+  });
+
+  /* ---------- Scroll-reveal: subtle fade-in on sections ---------- */
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+    const revealTargets = document.querySelectorAll("[data-reveal]");
+    const revealer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            revealer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    );
+    revealTargets.forEach((t) => revealer.observe(t));
+  } else {
+    // Reduced motion or no observer: show everything immediately
+    document.querySelectorAll("[data-reveal]").forEach((t) => t.classList.add("is-revealed"));
+  }
+
   /* ---------- Year in footer ---------- */
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
