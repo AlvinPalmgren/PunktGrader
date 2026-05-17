@@ -92,6 +92,7 @@
   });
 
   /* ---------- Pricing CTAs pre-fill the service dropdown ---------- */
+  const desktop = window.matchMedia("(min-width: 768px)");
   document.querySelectorAll("[data-book-tier]").forEach((el) => {
     el.addEventListener("click", () => {
       const tier = el.getAttribute("data-book-tier");
@@ -100,6 +101,16 @@
       // <option> without an explicit value attr reports its text content as .value
       if (Array.from(select.options).some((o) => o.value === tier)) {
         select.value = tier;
+      }
+      // On desktop, focus the name field so the user can start typing right
+      // away. Skipped on mobile because focusing an input pops the on-screen
+      // keyboard, which would cover the form they just scrolled to.
+      if (desktop.matches) {
+        const name = document.getElementById("name");
+        if (name) {
+          // Wait for the anchor-scroll to start so focus doesn't fight it.
+          setTimeout(() => name.focus({ preventScroll: true }), 100);
+        }
       }
     });
   });
