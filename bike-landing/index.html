@@ -113,6 +113,36 @@
           "@type": "AggregateRating",
           "ratingValue": "4.9",
           "reviewCount": "184"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Bike services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Quick Tune",
+              "description": "Gear & brake adjustment, tyre pressure & bolt check, wipe-down & lube. ~45 min, same-day.",
+              "price": "59.00",
+              "priceCurrency": "USD",
+              "itemOffered": { "@type": "Service", "name": "Quick Tune", "serviceType": "Bicycle tune-up" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Full Service",
+              "description": "Everything in Quick Tune plus drivetrain deep clean, wheel true & hub check, brake pad inspection. ~2 hrs, 24-hr turnaround.",
+              "price": "149.00",
+              "priceCurrency": "USD",
+              "itemOffered": { "@type": "Service", "name": "Full Service", "serviceType": "Bicycle full service" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Overhaul",
+              "description": "Full Service plus bearing service (hubs & BB), new cables & housing, frame inspection. ~4 hrs, 48-hr turnaround.",
+              "price": "299.00",
+              "priceCurrency": "USD",
+              "itemOffered": { "@type": "Service", "name": "Overhaul", "serviceType": "Bicycle overhaul" }
+            }
+          ]
         }
       }
     </script>
