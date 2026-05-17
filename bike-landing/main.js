@@ -182,6 +182,54 @@
   updateOpenStatus();
   setInterval(updateOpenStatus, 60_000);
 
+  /* ---------- Animated number counters in the About stats ----------
+     Initial HTML carries the final value (graceful no-JS). With JS, the
+     values reset to 0 and ease up to target when the stat enters viewport. */
+  const counters = document.querySelectorAll("[data-count-to]");
+  const fmtCount = (el, v) => {
+    const decimals = parseInt(el.dataset.countDecimals || "0", 10);
+    if (el.dataset.countFmt === "comma") {
+      el.textContent = Math.round(v).toLocaleString();
+    } else {
+      el.textContent = v.toFixed(decimals);
+    }
+  };
+
+  if (counters.length) {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      counters.forEach((el) => fmtCount(el, parseFloat(el.dataset.countTo)));
+    } else {
+      counters.forEach((el) => fmtCount(el, 0));
+      const animate = (el) => {
+        const target = parseFloat(el.dataset.countTo);
+        const duration = 1200;
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+          fmtCount(el, target * eased);
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      const seen = new WeakSet();
+      const countObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting && !seen.has(e.target)) {
+              seen.add(e.target);
+              animate(e.target);
+              countObs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      counters.forEach((el) => countObs.observe(el));
+    }
+  }
+
   /* ---------- Open all FAQs while printing, restore after ---------- */
   window.addEventListener("beforeprint", () => {
     document.querySelectorAll("details").forEach((d) => {
