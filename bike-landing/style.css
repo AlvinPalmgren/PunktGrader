@@ -84,12 +84,12 @@ summary:focus-visible {
   box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.15);
 }
 
-/* ------- Hero ------- */
+/* ------- Hero -------
+   Background-image moved to a real <img srcset> in the markup so the
+   browser picks the right size per viewport. background-color stays as a
+   fallback while the photo loads (or if it never does). */
 .hero {
-  background-color: #1b4332; /* fallback if the remote image fails to load */
-  background-image: url("https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=2000&q=80");
-  background-size: cover;
-  background-position: center;
+  background-color: #1b4332;
   min-height: 88vh;
   display: flex;
   align-items: center;
@@ -598,7 +598,8 @@ html:not(.js) #nav-toggle {
   .hero p {
     color: #000 !important;
   }
-  .hero a {
+  .hero a,
+  .hero img {
     display: none !important;
   }
 

@@ -35,11 +35,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
-    <!-- Preload the hero image so it lands as the LCP element fast -->
+    <!-- Preload the hero image so it lands as the LCP element fast.
+         imagesrcset/imagesizes mirror the <img> so the browser fetches the
+         right size for the viewport instead of always pulling the 2000w. -->
     <link
       rel="preload"
       as="image"
-      href="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=2000&q=80"
+      imagesrcset="
+        https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=800&q=70 800w,
+        https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1280&q=75 1280w,
+        https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=2000&q=80 2000w
+      "
+      imagesizes="100vw"
       fetchpriority="high"
     />
     <link
@@ -213,6 +220,20 @@
     <main id="top">
       <!-- HERO -->
       <section class="hero relative isolate overflow-hidden pt-28 md:pt-36">
+        <img
+          src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=2000&q=80"
+          srcset="
+            https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=800&q=70 800w,
+            https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1280&q=75 1280w,
+            https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=2000&q=80 2000w
+          "
+          sizes="100vw"
+          alt=""
+          fetchpriority="high"
+          decoding="async"
+          data-bg-fallback
+          class="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
         <div class="hero__overlay absolute inset-0 -z-10"></div>
 
         <div class="mx-auto max-w-6xl px-6 py-24 md:py-36">
