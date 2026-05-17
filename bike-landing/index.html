@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Set the .js flag as early as possible so the CSS can gate JS-only
+         hidden states without flashing visible-then-hidden on load. -->
+    <script>document.documentElement.classList.add("js");</script>
     <title>Ridgeline Cycles — Sales, Service & Custom Builds</title>
     <meta
       name="description"

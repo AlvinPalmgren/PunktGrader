@@ -518,17 +518,28 @@ summary:focus-visible {
   }
 }
 
-/* ------- Scroll reveal ------- */
+/* ------- Scroll reveal -------
+   Only hide reveal targets when JS is running. With JS off, the page
+   stays fully visible — main.js adds .js to <html> on startup. */
 [data-reveal] {
-  opacity: 0;
-  transform: translateY(24px);
   transition: opacity 0.7s ease, transform 0.7s ease;
-  will-change: opacity, transform;
 }
 
-[data-reveal].is-revealed {
-  opacity: 1;
-  transform: translateY(0);
+html.js [data-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* No-JS fallbacks for elements that rely on JS to function */
+@media (max-width: 767px) {
+  html:not(.js) #mobile-menu {
+    display: block !important;
+  }
+}
+
+html:not(.js) #open-status,
+html:not(.js) #nav-toggle {
+  display: none !important;
 }
 
 /* ------- Motion ------- */
