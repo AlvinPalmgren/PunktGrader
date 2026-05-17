@@ -8,6 +8,24 @@
       name="description"
       content="Ridgeline Cycles is your local bike shop for sales, expert repairs, and custom builds. Book a service or visit us today."
     />
+    <meta name="theme-color" content="#1B4332" />
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ridgeline Cycles — Sales, Service & Custom Builds" />
+    <meta
+      property="og:description"
+      content="Your local bike shop for sales, expert repairs, and custom builds. Book a service in under a minute."
+    />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1200&q=80" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Inline SVG favicon (no external file needed) -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232D6A4F' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='5.5' cy='17.5' r='3.5'/><circle cx='18.5' cy='17.5' r='3.5'/><path d='M15 6h3l3 6'/><path d='m5.5 17.5 4-9h4l4 9'/></svg>"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -69,10 +87,11 @@
           Ridgeline Cycles
         </a>
 
-        <ul class="hidden items-center gap-8 md:flex">
+        <ul class="hidden items-center gap-7 md:flex">
           <li><a class="nav-link" href="#services">Services</a></li>
+          <li><a class="nav-link" href="#pricing">Pricing</a></li>
           <li><a class="nav-link" href="#about">About</a></li>
-          <li><a class="nav-link" href="#testimonials">Reviews</a></li>
+          <li><a class="nav-link" href="#faq">FAQ</a></li>
           <li><a class="nav-link" href="#contact">Contact</a></li>
           <li>
             <a
@@ -121,8 +140,9 @@
       <div id="mobile-menu" class="hidden border-t border-charcoal/10 bg-cream md:hidden">
         <ul class="space-y-1 px-6 py-4 text-base">
           <li><a class="mobile-link" href="#services">Services</a></li>
+          <li><a class="mobile-link" href="#pricing">Pricing</a></li>
           <li><a class="mobile-link" href="#about">About</a></li>
-          <li><a class="mobile-link" href="#testimonials">Reviews</a></li>
+          <li><a class="mobile-link" href="#faq">FAQ</a></li>
           <li><a class="mobile-link" href="#contact">Contact</a></li>
           <li class="pt-2">
             <a
@@ -240,8 +260,66 @@
         </div>
       </section>
 
+      <!-- PRICING -->
+      <section id="pricing" class="scroll-mt-24 bg-white/60 py-24">
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mx-auto max-w-2xl text-center">
+            <p class="text-sm font-semibold uppercase tracking-widest text-forest">Service menu</p>
+            <h2 class="mt-2 font-display text-4xl font-bold text-charcoal md:text-5xl">
+              Transparent pricing
+            </h2>
+            <p class="mt-4 text-charcoal/70">
+              Common jobs, starting prices. Anything bigger we'll quote up front — no surprises
+              when you pick the bike up.
+            </p>
+          </div>
+
+          <div class="mt-14 grid gap-6 md:grid-cols-3">
+            <article class="pricing-card">
+              <h3 class="pricing-card__title">Quick Tune</h3>
+              <p class="pricing-card__price">$59</p>
+              <p class="pricing-card__sub">~45 min · same-day</p>
+              <ul class="pricing-card__list">
+                <li>Gear & brake adjustment</li>
+                <li>Tyre pressure & bolt check</li>
+                <li>Wipe-down & lube</li>
+              </ul>
+            </article>
+
+            <article class="pricing-card pricing-card--featured">
+              <span class="pricing-card__badge">Most popular</span>
+              <h3 class="pricing-card__title">Full Service</h3>
+              <p class="pricing-card__price">$149</p>
+              <p class="pricing-card__sub">~2 hrs · 24-hr turnaround</p>
+              <ul class="pricing-card__list">
+                <li>Everything in Quick Tune</li>
+                <li>Drivetrain deep clean</li>
+                <li>Wheel true & hub check</li>
+                <li>Brake pad inspection</li>
+              </ul>
+            </article>
+
+            <article class="pricing-card">
+              <h3 class="pricing-card__title">Overhaul</h3>
+              <p class="pricing-card__price">$299</p>
+              <p class="pricing-card__sub">~4 hrs · 48-hr turnaround</p>
+              <ul class="pricing-card__list">
+                <li>Full Service +</li>
+                <li>Bearing service (hubs & BB)</li>
+                <li>New cables & housing</li>
+                <li>Frame inspection</li>
+              </ul>
+            </article>
+          </div>
+
+          <p class="mt-8 text-center text-sm text-charcoal/60">
+            Prices exclude parts. E-bike servicing available — ask for a quote.
+          </p>
+        </div>
+      </section>
+
       <!-- ABOUT -->
-      <section id="about" class="scroll-mt-24 bg-white/60 py-24">
+      <section id="about" class="scroll-mt-24 py-24">
         <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-2">
           <div>
             <p class="text-sm font-semibold uppercase tracking-widest text-forest">Our story</p>
@@ -331,6 +409,61 @@
                 <span class="block text-sm font-normal text-charcoal/60">MTB enthusiast</span>
               </figcaption>
             </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="scroll-mt-24 bg-white/60 py-24">
+        <div class="mx-auto max-w-3xl px-6">
+          <div class="text-center">
+            <p class="text-sm font-semibold uppercase tracking-widest text-forest">Good to know</p>
+            <h2 class="mt-2 font-display text-4xl font-bold text-charcoal md:text-5xl">
+              Frequently asked
+            </h2>
+          </div>
+
+          <div class="mt-12 space-y-3">
+            <details class="faq-item" open>
+              <summary class="faq-item__q">Do I need an appointment to drop off my bike?</summary>
+              <div class="faq-item__a">
+                Walk-ins are welcome. If you want a guaranteed turnaround, booking ahead via the
+                form below or a quick phone call locks in your slot.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-item__q">How long does a service usually take?</summary>
+              <div class="faq-item__a">
+                A Quick Tune is same-day if dropped off before noon. Full Services turn around in
+                24 hours, Overhauls in 48. Custom builds depend on parts availability — we'll
+                confirm a date when we spec the build.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-item__q">Do you service e-bikes?</summary>
+              <div class="faq-item__a">
+                Yes — most major systems (Bosch, Shimano STEPS, Bafang). We're not a warranty
+                centre for motor internals, but we handle everything around them: drivetrain,
+                brakes, wheels, diagnostics.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-item__q">Will you work on bikes you didn't sell?</summary>
+              <div class="faq-item__a">
+                Absolutely. Doesn't matter where you bought it — if it's a bike, we'll fix it.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-item__q">Do you offer trade-ins or buy second-hand bikes?</summary>
+              <div class="faq-item__a">
+                We take trade-ins toward new bikes on a case-by-case basis. For straight buyouts,
+                send a few photos through the contact form and we'll come back with an offer.
+              </div>
+            </details>
           </div>
         </div>
       </section>

@@ -31,7 +31,7 @@
   onScroll();
 
   /* ---------- Active section highlight ---------- */
-  const sections = ["services", "about", "testimonials", "contact"]
+  const sections = ["services", "pricing", "about", "testimonials", "faq", "contact"]
     .map((id) => document.getElementById(id))
     .filter(Boolean);
 
@@ -53,9 +53,13 @@
     sections.forEach((s) => io.observe(s));
   }
 
-  /* ---------- Contact form (client-only demo) ---------- */
+  /* ---------- Contact form: open user's mail client with a pre-filled message ----------
+     No backend on this static site — mailto: keeps the form genuinely useful by handing
+     the message off to the visitor's mail app. Replace with a real endpoint if/when
+     the shop wires up a form service (Formspree, Netlify Forms, etc.). */
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
+  const SHOP_EMAIL = "hello@ridgelinecycles.example";
 
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -63,8 +67,26 @@
       form.reportValidity();
       return;
     }
-    const name = /** @type {HTMLInputElement} */ (form.elements.namedItem("name")).value.trim();
-    status.textContent = `Thanks, ${name || "rider"}! We'll get back to you within one business day.`;
+    const get = (n) =>
+      /** @type {HTMLInputElement|HTMLTextAreaElement|HTMLSelectElement} */ (
+        form.elements.namedItem(n)
+      ).value.trim();
+
+    const name = get("name");
+    const email = get("email");
+    const service = get("service");
+    const message = get("message");
+
+    const subject = `Booking enquiry — ${service}`;
+    const body =
+      `Hi Ridgeline Cycles,\n\n${message}\n\n` +
+      `— ${name}\nReply to: ${email}`;
+
+    window.location.href =
+      `mailto:${SHOP_EMAIL}?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+
+    status.textContent = `Thanks, ${name || "rider"}! Your mail app should open with the message ready to send.`;
     status.classList.remove("hidden");
     form.reset();
   });
