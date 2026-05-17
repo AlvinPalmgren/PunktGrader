@@ -453,6 +453,16 @@ summary:focus-visible {
 }
 
 /* ------- Footer ------- */
+.footer-link {
+  color: rgba(248, 244, 239, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #e9a825;
+}
+
 .social-link {
   display: inline-flex;
   align-items: center;
@@ -618,12 +628,14 @@ html:not(.js) #nav-toggle {
 
   /* Dark sections become light for print */
   .bg-forest-dark,
-  .bg-forest {
+  .bg-forest,
+  .bg-charcoal {
     background: #fff !important;
     color: #000 !important;
   }
   .bg-forest-dark *,
-  .bg-forest * {
+  .bg-forest *,
+  .bg-charcoal * {
     color: #000 !important;
   }
 
