@@ -116,6 +116,57 @@
         }
       }
     </script>
+
+    <!-- FAQPage structured data — mirrors the visible FAQ section so search
+         engines can surface the answers directly. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I need an appointment to drop off my bike?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Walk-ins are welcome. If you want a guaranteed turnaround, booking ahead via the form below or a quick phone call locks in your slot."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does a service usually take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Quick Tune is same-day if dropped off before noon. Full Services turn around in 24 hours, Overhauls in 48. Custom builds depend on parts availability — we'll confirm a date when we spec the build."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you service e-bikes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes — most major systems (Bosch, Shimano STEPS, Bafang). We're not a warranty centre for motor internals, but we handle everything around them: drivetrain, brakes, wheels, diagnostics."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will you work on bikes you didn't sell?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. Doesn't matter where you bought it — if it's a bike, we'll fix it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer trade-ins or buy second-hand bikes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We take trade-ins toward new bikes on a case-by-case basis. For straight buyouts, send a few photos through the contact form and we'll come back with an offer."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body class="bg-cream font-body text-charcoal antialiased">
     <a href="#top" class="skip-link">Skip to main content</a>
