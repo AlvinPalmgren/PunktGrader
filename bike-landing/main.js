@@ -97,8 +97,10 @@
       const tier = el.getAttribute("data-book-tier");
       const select = /** @type {HTMLSelectElement|null} */ (document.getElementById("service"));
       if (!select || !tier) return;
-      const match = Array.from(select.options).find((o) => o.value === tier || o.text === tier);
-      if (match) select.value = match.value || match.text;
+      // <option> without an explicit value attr reports its text content as .value
+      if (Array.from(select.options).some((o) => o.value === tier)) {
+        select.value = tier;
+      }
     });
   });
 
