@@ -182,6 +182,20 @@
   updateOpenStatus();
   setInterval(updateOpenStatus, 60_000);
 
+  /* ---------- Open all FAQs while printing, restore after ---------- */
+  window.addEventListener("beforeprint", () => {
+    document.querySelectorAll("details").forEach((d) => {
+      d.dataset.wasOpen = String(d.open);
+      d.open = true;
+    });
+  });
+  window.addEventListener("afterprint", () => {
+    document.querySelectorAll("details").forEach((d) => {
+      d.open = d.dataset.wasOpen === "true";
+      delete d.dataset.wasOpen;
+    });
+  });
+
   /* ---------- Drop images that fail to load -----------
      Container has a background colour fallback; removing the broken <img>
      stops the alt text + missing-image icon from overlapping other content. */

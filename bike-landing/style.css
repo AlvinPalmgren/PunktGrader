@@ -548,3 +548,92 @@ html:not(.js) #nav-toggle {
     transform: none;
   }
 }
+
+/* ------- Print ------- */
+@media print {
+  /* Ink-friendly defaults */
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+  }
+
+  /* Strip interactive / decorative chrome */
+  #site-header,
+  #mobile-cta,
+  .skip-link,
+  #contact-form,
+  #open-status,
+  .social-link {
+    display: none !important;
+  }
+
+  /* Reveal everything */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Kill effects that waste ink */
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Hero: collapse to a plain heading instead of a full-bleed banner */
+  .hero {
+    min-height: auto !important;
+    padding: 0 !important;
+    background: none !important;
+  }
+  .hero__overlay {
+    display: none !important;
+  }
+  .hero h1,
+  .hero p {
+    color: #000 !important;
+  }
+  .hero a {
+    display: none !important;
+  }
+
+  /* Dark sections become light for print */
+  .bg-forest-dark,
+  .bg-forest {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .bg-forest-dark *,
+  .bg-forest * {
+    color: #000 !important;
+  }
+
+  /* Keep cards/FAQ items intact across page breaks */
+  .service-card,
+  .pricing-card,
+  .testimonial-card,
+  .faq-item,
+  figure {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid #ccc !important;
+    background: #fff !important;
+  }
+
+  /* main.js opens all <details> before print and restores after */
+  .faq-item__q::after {
+    display: none;
+  }
+
+  /* Annotate web URLs after their link text so the printout is useful */
+  a[href^="http"]:not(.nav-link):not([href^="#"])::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+  }
+}
