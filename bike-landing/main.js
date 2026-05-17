@@ -182,6 +182,13 @@
   updateOpenStatus();
   setInterval(updateOpenStatus, 60_000);
 
+  /* ---------- Drop images that fail to load -----------
+     Container has a background colour fallback; removing the broken <img>
+     stops the alt text + missing-image icon from overlapping other content. */
+  document.querySelectorAll("img[data-bg-fallback]").forEach((img) => {
+    img.addEventListener("error", () => img.remove(), { once: true });
+  });
+
   /* ---------- Year in footer ---------- */
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
