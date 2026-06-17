@@ -1,0 +1,7 @@
+# Allow all crawlers. Replace the Sitemap URL with the real deployed
+# domain once this lands somewhere — search engines fetch the sitemap
+# at exactly this address.
+User-agent: *
+Allow: /
+
+Sitemap: https://ridgelinecycles.example/sitemap.xml

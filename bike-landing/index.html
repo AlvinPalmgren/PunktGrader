@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Set the .js flag as early as possible so the CSS can gate JS-only
+         hidden states without flashing visible-then-hidden on load. -->
+    <script>document.documentElement.classList.add("js");</script>
+    <title>Ridgeline Cycles — Sales, Service & Custom Builds</title>
+    <meta
+      name="description"
+      content="Ridgeline Cycles is your local bike shop for sales, expert repairs, and custom builds. Book a service or visit us today."
+    />
+    <meta name="theme-color" content="#1B4332" />
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ridgeline Cycles — Sales, Service & Custom Builds" />
+    <meta
+      property="og:description"
+      content="Your local bike shop for sales, expert repairs, and custom builds. Book a service in under a minute."
+    />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1200&q=80" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Inline SVG favicon (no external file needed) -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232D6A4F' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='5.5' cy='17.5' r='3.5'/><circle cx='18.5' cy='17.5' r='3.5'/><path d='M15 6h3l3 6'/><path d='m5.5 17.5 4-9h4l4 9'/></svg>"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+
+    <!-- Preload the hero image so it lands as the LCP element fast.
+         imagesrcset/imagesizes mirror the <img> so the browser fetches the
+         right size for the viewport instead of always pulling the 2000w. -->
+    <link
+      rel="preload"
+      as="image"
+      imagesrcset="
+        https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=800&q=70 800w,
+        https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1280&q=75 1280w,
+        https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=2000&q=80 2000w
+      "
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              forest: "#2D6A4F",
+              "forest-dark": "#1B4332",
+              cream: "#F8F4EF",
+              charcoal: "#2C2C2C",
+              amber: "#E9A825",
+            },
+            fontFamily: {
+              display: ["Montserrat", "system-ui", "sans-serif"],
+              body: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- LocalBusiness structured data — helps Google show the shop in local
+         results with hours, address, phone, and rating. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BicycleStore",
+        "name": "Ridgeline Cycles",
+        "image": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1200&q=80",
+        "description": "Local bike shop offering sales, expert repairs, servicing, and custom builds.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "42 Maple Street",
+          "addressLocality": "Riverton",
+          "addressCountry": "US"
+        },
+        "telephone": "+1-555-247-1042",
+        "email": "hello@ridgelinecycles.example",
+        "priceRange": "$$",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:00",
+            "closes": "16:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "184"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Bike services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Quick Tune",
+              "description": "Gear & brake adjustment, tyre pressure & bolt check, wipe-down & lube. ~45 min, same-day.",
+              "price": "59.00",
+              "priceCurrency": "USD",
+              "itemOffered": { "@type": "Service", "name": "Quick Tune", "serviceType": "Bicycle tune-up" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Full Service",
+              "description": "Everything in Quick Tune plus drivetrain deep clean, wheel true & hub check, brake pad inspection. ~2 hrs, 24-hr turnaround.",
+              "price": "149.00",
+              "priceCurrency": "USD",
+              "itemOffered": { "@type": "Service", "name": "Full Service", "serviceType": "Bicycle full service" }
+            },
+            {
+              "@type": "Offer",
+              "name": "Overhaul",
+              "description": "Full Service plus bearing service (hubs & BB), new cables & housing, frame inspection. ~4 hrs, 48-hr turnaround.",
+              "price": "299.00",
+              "priceCurrency": "USD",
+              "itemOffered": { "@type": "Service", "name": "Overhaul", "serviceType": "Bicycle overhaul" }
+            }
+          ]
+        }
+      }
+    </script>
+
+    <!-- FAQPage structured data — mirrors the visible FAQ section so search
+         engines can surface the answers directly. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I need an appointment to drop off my bike?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Walk-ins are welcome. If you want a guaranteed turnaround, booking ahead via the form below or a quick phone call locks in your slot."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does a service usually take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Quick Tune is same-day if dropped off before noon. Full Services turn around in 24 hours, Overhauls in 48. Custom builds depend on parts availability — we'll confirm a date when we spec the build."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you service e-bikes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes — most major systems (Bosch, Shimano STEPS, Bafang). We're not a warranty centre for motor internals, but we handle everything around them: drivetrain, brakes, wheels, diagnostics."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will you work on bikes you didn't sell?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. Doesn't matter where you bought it — if it's a bike, we'll fix it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer trade-ins or buy second-hand bikes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We take trade-ins toward new bikes on a case-by-case basis. For straight buyouts, send a few photos through the contact form and we'll come back with an offer."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body class="bg-cream font-body text-charcoal antialiased">
+    <a href="#top" class="skip-link">Skip to main content</a>
+
+    <!-- NAVBAR -->
+    <header
+      id="site-header"
+      class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-cream/85 backdrop-blur transition-all"
+    >
+      <nav
+        class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
+        aria-label="Primary"
+      >
+        <a href="#top" class="flex items-center gap-2 font-display text-xl font-bold text-forest-dark">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-7 w-7 text-forest"
+            aria-hidden="true"
+          >
+            <circle cx="5.5" cy="17.5" r="3.5" />
+            <circle cx="18.5" cy="17.5" r="3.5" />
+            <path d="M15 6h3l3 6" />
+            <path d="m5.5 17.5 4-9h4l4 9" />
+          </svg>
+          Ridgeline Cycles
+        </a>
+
+        <ul class="hidden items-center gap-7 md:flex">
+          <li><a class="nav-link" href="#services">Services</a></li>
+          <li><a class="nav-link" href="#pricing">Pricing</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#faq">FAQ</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+          <li>
+            <a
+              href="#contact"
+              class="rounded-full bg-forest px-5 py-2 font-semibold text-cream shadow-sm transition hover:bg-forest-dark"
+              >Book a Service</a
+            >
+          </li>
+        </ul>
+
+        <button
+          id="nav-toggle"
+          type="button"
+          class="inline-flex items-center justify-center rounded-md p-2 text-charcoal md:hidden"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            id="nav-icon-open"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg
+            id="nav-icon-close"
+            xmlns="http://www.w3.org/2000/svg"
+            class="hidden h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </nav>
+
+      <div id="mobile-menu" class="hidden border-t border-charcoal/10 bg-cream md:hidden">
+        <ul class="space-y-1 px-6 py-4 text-base">
+          <li><a class="mobile-link" href="#services">Services</a></li>
+          <li><a class="mobile-link" href="#pricing">Pricing</a></li>
+          <li><a class="mobile-link" href="#about">About</a></li>
+          <li><a class="mobile-link" href="#faq">FAQ</a></li>
+          <li><a class="mobile-link" href="#contact">Contact</a></li>
+          <li class="pt-2">
+            <a
+              href="#contact"
+              class="block rounded-full bg-forest px-5 py-3 text-center font-semibold text-cream shadow-sm hover:bg-forest-dark"
+              >Book a Service</a
+            >
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="hero relative isolate overflow-hidden pt-28 md:pt-36">
+        <img
+          src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=2000&q=80"
+          srcset="
+            https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=800&q=70 800w,
+            https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1280&q=75 1280w,
+            https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=2000&q=80 2000w
+          "
+          sizes="100vw"
+          alt=""
+          fetchpriority="high"
+          decoding="async"
+          data-bg-fallback
+          class="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
+        <div class="hero__overlay absolute inset-0 -z-10"></div>
+
+        <div class="mx-auto max-w-6xl px-6 py-24 md:py-36">
+          <div class="max-w-2xl text-cream">
+            <p
+              class="mb-4 inline-block rounded-full bg-amber/90 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-charcoal"
+            >
+              Sales · Service · Repairs
+            </p>
+            <h1 class="font-display text-5xl font-extrabold leading-tight md:text-7xl">
+              Your Ride <br />Starts Here.
+            </h1>
+            <p class="mt-6 max-w-xl text-lg text-cream/90 md:text-xl">
+              From trusty commuters to weekend trail rippers — we sell, fix, and build bikes
+              that match the way you ride. Drop in, or book a service in under a minute.
+            </p>
+            <div class="mt-10 flex flex-wrap gap-4">
+              <a
+                href="#contact"
+                class="rounded-full bg-amber px-7 py-3 font-semibold text-charcoal shadow-lg shadow-black/20 transition hover:translate-y-[-1px] hover:bg-amber/90"
+                >Book a Service</a
+              >
+              <a
+                href="#services"
+                class="rounded-full border border-cream/40 px-7 py-3 font-semibold text-cream transition hover:bg-cream/10"
+                >Explore Services</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services" class="scroll-mt-24 py-24" data-reveal>
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mx-auto max-w-2xl text-center">
+            <p class="text-sm font-semibold uppercase tracking-widest text-forest">What we do</p>
+            <h2 class="mt-2 font-display text-4xl font-bold text-charcoal md:text-5xl">
+              Built for every kind of rider
+            </h2>
+            <p class="mt-4 text-charcoal/70">
+              Whether you're shopping for your first bike or chasing your tenth PB, we've got the
+              gear and the wrench-time to keep you rolling.
+            </p>
+          </div>
+
+          <div class="mt-14 grid gap-6 md:grid-cols-3">
+            <!-- Card 1 -->
+            <article class="service-card">
+              <div class="service-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="5.5" cy="17.5" r="3.5" />
+                  <circle cx="18.5" cy="17.5" r="3.5" />
+                  <path d="M15 6h3l3 6" />
+                  <path d="m5.5 17.5 4-9h4l4 9" />
+                </svg>
+              </div>
+              <h3 class="service-card__title">Bike Sales</h3>
+              <p class="service-card__body">
+                Hand-picked road, gravel, mountain, and city bikes from brands we trust.
+                Test-ride before you buy.
+              </p>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="service-card">
+              <div class="service-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-2.4 2.6-2.6Z" />
+                </svg>
+              </div>
+              <h3 class="service-card__title">Repairs & Servicing</h3>
+              <p class="service-card__body">
+                Tune-ups, brake bleeds, drivetrain rebuilds, wheel truing. Most jobs turn around
+                in 24–48 hours.
+              </p>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="service-card">
+              <div class="service-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4Z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+              </div>
+              <h3 class="service-card__title">Custom Builds</h3>
+              <p class="service-card__body">
+                Spec the frame, the groupset, the wheels — we'll build it from the ground up to
+                match how and where you ride.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section id="pricing" class="scroll-mt-24 bg-white/60 py-24" data-reveal>
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mx-auto max-w-2xl text-center">
+            <p class="text-sm font-semibold uppercase tracking-widest text-forest">Service menu</p>
+            <h2 class="mt-2 font-display text-4xl font-bold text-charcoal md:text-5xl">
+              Transparent pricing
+            </h2>
+            <p class="mt-4 text-charcoal/70">
+              Common jobs, starting prices. Anything bigger we'll quote up front — no surprises
+              when you pick the bike up.
+            </p>
+          </div>
+
+          <div class="mt-14 grid gap-6 md:grid-cols-3">
+            <article class="pricing-card">
+              <h3 class="pricing-card__title">Quick Tune</h3>
+              <p class="pricing-card__price">$59</p>
+              <p class="pricing-card__sub">~45 min · same-day</p>
+              <ul class="pricing-card__list">
+                <li>Gear & brake adjustment</li>
+                <li>Tyre pressure & bolt check</li>
+                <li>Wipe-down & lube</li>
+              </ul>
+              <a
+                href="#contact"
+                class="pricing-card__cta"
+                data-book-tier="Quick Tune ($59)"
+              >Book Quick Tune</a>
+            </article>
+
+            <article class="pricing-card pricing-card--featured">
+              <span class="pricing-card__badge">Most popular</span>
+              <h3 class="pricing-card__title">Full Service</h3>
+              <p class="pricing-card__price">$149</p>
+              <p class="pricing-card__sub">~2 hrs · 24-hr turnaround</p>
+              <ul class="pricing-card__list">
+                <li>Everything in Quick Tune</li>
+                <li>Drivetrain deep clean</li>
+                <li>Wheel true & hub check</li>
+                <li>Brake pad inspection</li>
+              </ul>
+              <a
+                href="#contact"
+                class="pricing-card__cta pricing-card__cta--primary"
+                data-book-tier="Full Service ($149)"
+              >Book Full Service</a>
+            </article>
+
+            <article class="pricing-card">
+              <h3 class="pricing-card__title">Overhaul</h3>
+              <p class="pricing-card__price">$299</p>
+              <p class="pricing-card__sub">~4 hrs · 48-hr turnaround</p>
+              <ul class="pricing-card__list">
+                <li>Full Service +</li>
+                <li>Bearing service (hubs & BB)</li>
+                <li>New cables & housing</li>
+                <li>Frame inspection</li>
+              </ul>
+              <a
+                href="#contact"
+                class="pricing-card__cta"
+                data-book-tier="Overhaul ($299)"
+              >Book Overhaul</a>
+            </article>
+          </div>
+
+          <p class="mt-8 text-center text-sm text-charcoal/60">
+            Prices exclude parts. E-bike servicing available — ask for a quote.
+          </p>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="scroll-mt-24 py-24" data-reveal>
+        <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-2">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-widest text-forest">Our story</p>
+            <h2 class="mt-2 font-display text-4xl font-bold text-charcoal md:text-5xl">
+              Wrenches, riders, neighbours.
+            </h2>
+            <p class="mt-6 text-charcoal/80">
+              Ridgeline Cycles started in 2009 in a one-car garage. Fifteen years later we're still
+              a small crew of mechanics and riders who'd rather get your bike right than rush you
+              out the door.
+            </p>
+            <p class="mt-4 text-charcoal/80">
+              We ride what we sell, we service what we ride, and we love nothing more than seeing
+              someone roll a new build out the door grinning.
+            </p>
+
+            <dl class="mt-8 grid grid-cols-3 gap-6">
+              <div>
+                <dt class="text-3xl font-bold text-forest font-display">
+                  <span data-count-to="15">15</span>+
+                </dt>
+                <dd class="mt-1 text-sm text-charcoal/70">Years in business</dd>
+              </div>
+              <div>
+                <dt class="text-3xl font-bold text-forest font-display">
+                  <span data-count-to="4200" data-count-fmt="comma">4,200</span>
+                </dt>
+                <dd class="mt-1 text-sm text-charcoal/70">Bikes serviced</dd>
+              </div>
+              <div>
+                <dt class="text-3xl font-bold text-forest font-display">
+                  <span aria-hidden="true">★</span>
+                  <span data-count-to="4.9" data-count-decimals="1">4.9</span>
+                </dt>
+                <dd class="mt-1 text-sm text-charcoal/70">Average rating</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-forest-dark shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?auto=format&fit=crop&w=1400&q=80"
+              alt="Workshop bench with bike tools and a partially built bicycle"
+              loading="lazy"
+              decoding="async"
+              data-bg-fallback
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+            <span class="absolute bottom-4 left-4 rounded-full bg-cream/90 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-charcoal">
+              In the workshop
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section id="testimonials" class="scroll-mt-24 py-24" data-reveal>
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mx-auto max-w-2xl text-center">
+            <p class="text-sm font-semibold uppercase tracking-widest text-forest">Rider stories</p>
+            <h2 class="mt-2 font-display text-4xl font-bold text-charcoal md:text-5xl">
+              Don't take our word for it
+            </h2>
+          </div>
+
+          <div class="mt-14 grid gap-6 md:grid-cols-3">
+            <figure class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="Five out of five stars">★★★★★</div>
+              <blockquote class="mt-4 text-charcoal/80">
+                "Took my old gravel bike in expecting bad news, walked out with what feels like a
+                new ride. Honest, fast, and fairly priced."
+              </blockquote>
+              <figcaption class="mt-6 font-semibold text-charcoal">
+                Maya R.
+                <span class="block text-sm font-normal text-charcoal/60">Weekend gravel rider</span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="Five out of five stars">★★★★★</div>
+              <blockquote class="mt-4 text-charcoal/80">
+                "They built me a custom commuter that's bombproof and actually looks great.
+                Genuine cyclists, not just salespeople."
+              </blockquote>
+              <figcaption class="mt-6 font-semibold text-charcoal">
+                Dan O.
+                <span class="block text-sm font-normal text-charcoal/60">Daily commuter</span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial-card">
+              <div class="testimonial-card__stars" aria-label="Five out of five stars">★★★★★</div>
+              <blockquote class="mt-4 text-charcoal/80">
+                "Best bike shop in town. They took time to teach me how to do basic maintenance
+                myself — no shop ever does that."
+              </blockquote>
+              <figcaption class="mt-6 font-semibold text-charcoal">
+                Priya S.
+                <span class="block text-sm font-normal text-charcoal/60">MTB enthusiast</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="scroll-mt-24 bg-white/60 py-24" data-reveal>
+        <div class="mx-auto max-w-3xl px-6">
+          <div class="text-center">
+            <p class="text-sm font-semibold uppercase tracking-widest text-forest">Good to know</p>
+            <h2 class="mt-2 font-display text-4xl font-bold text-charcoal md:text-5xl">
+              Frequently asked
+            </h2>
+          </div>
+
+          <div class="mt-12 space-y-3">
+            <details class="faq-item" open>
+              <summary class="faq-item__q">Do I need an appointment to drop off my bike?</summary>
+              <div class="faq-item__a">
+                Walk-ins are welcome. If you want a guaranteed turnaround, booking ahead via the
+                form below or a quick phone call locks in your slot.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-item__q">How long does a service usually take?</summary>
+              <div class="faq-item__a">
+                A Quick Tune is same-day if dropped off before noon. Full Services turn around in
+                24 hours, Overhauls in 48. Custom builds depend on parts availability — we'll
+                confirm a date when we spec the build.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-item__q">Do you service e-bikes?</summary>
+              <div class="faq-item__a">
+                Yes — most major systems (Bosch, Shimano STEPS, Bafang). We're not a warranty
+                centre for motor internals, but we handle everything around them: drivetrain,
+                brakes, wheels, diagnostics.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-item__q">Will you work on bikes you didn't sell?</summary>
+              <div class="faq-item__a">
+                Absolutely. Doesn't matter where you bought it — if it's a bike, we'll fix it.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-item__q">Do you offer trade-ins or buy second-hand bikes?</summary>
+              <div class="faq-item__a">
+                We take trade-ins toward new bikes on a case-by-case basis. For straight buyouts,
+                send a few photos through the contact form and we'll come back with an offer.
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="scroll-mt-24 bg-forest-dark py-24 text-cream" data-reveal>
+        <div class="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-widest text-amber">Get in touch</p>
+            <h2 class="mt-2 font-display text-4xl font-bold md:text-5xl">
+              Book a service or just say hi
+            </h2>
+            <p class="mt-4 text-cream/80">
+              Drop us a line and we'll get back to you the same day. Or just swing by the shop —
+              the kettle is usually on.
+            </p>
+
+            <ul class="mt-10 space-y-5 text-cream/90">
+              <li class="flex items-start gap-4">
+                <span class="contact-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-5 w-5">
+                    <path d="M12 22s8-7.58 8-13a8 8 0 1 0-16 0c0 5.42 8 13 8 13Z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="font-semibold">Visit the shop</p>
+                  <p class="text-cream/70">
+                    <a
+                      class="contact-link"
+                      href="https://www.google.com/maps/search/?api=1&query=42+Maple+Street+Riverton"
+                      target="_blank"
+                      rel="noopener"
+                    >42 Maple Street, Riverton</a>
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <span class="contact-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-5 w-5">
+                    <path d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7.21 10.79a16 16 0 0 0 6 6l2.04-1.61a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1Z" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="font-semibold">Call us</p>
+                  <p class="text-cream/70">
+                    <a class="contact-link" href="tel:+15552471042">(555) 247-1042</a>
+                  </p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <span class="contact-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-5 w-5">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                  </svg>
+                </span>
+                <div>
+                  <div class="flex items-center gap-3">
+                    <p class="font-semibold">Opening hours</p>
+                    <span
+                      id="open-status"
+                      class="open-status open-status--unknown"
+                      aria-live="polite"
+                    >
+                      <span class="open-status__dot" aria-hidden="true"></span>
+                      <span class="open-status__label">Checking…</span>
+                    </span>
+                  </div>
+                  <p class="text-cream/70">Tue–Fri 9:00–18:00 · Sat 9:00–16:00 · Closed Sun & Mon</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <form
+            id="contact-form"
+            class="rounded-2xl bg-cream p-8 text-charcoal shadow-2xl"
+            novalidate
+          >
+            <div class="space-y-5">
+              <div>
+                <label for="name" class="form-label">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  autocomplete="name"
+                  class="form-input"
+                  placeholder="Alex Rider"
+                />
+              </div>
+              <div>
+                <label for="email" class="form-label">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  class="form-input"
+                  placeholder="you@example.com"
+                />
+              </div>
+              <div>
+                <label for="service" class="form-label">What do you need?</label>
+                <select id="service" name="service" class="form-input" required>
+                  <option value="" disabled selected>Choose a service…</option>
+                  <option>Quick Tune ($59)</option>
+                  <option>Full Service ($149)</option>
+                  <option>Overhaul ($299)</option>
+                  <option>Repair (specific issue)</option>
+                  <option>New bike enquiry</option>
+                  <option>Custom build consult</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div>
+                <label for="message" class="form-label">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  class="form-input resize-none"
+                  placeholder="Tell us a little about your bike or what you're after…"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full rounded-full bg-forest px-6 py-3 font-semibold text-cream shadow-md transition hover:bg-forest-dark"
+              >
+                Send message
+              </button>
+
+              <p
+                id="form-status"
+                role="status"
+                aria-live="polite"
+                class="hidden rounded-md bg-forest/10 px-4 py-3 text-sm text-forest-dark"
+              ></p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-charcoal text-cream/80">
+      <div class="mx-auto max-w-6xl px-6 pt-14 pb-8">
+        <div class="grid gap-10 md:grid-cols-3">
+          <!-- Brand block -->
+          <div>
+            <div class="flex items-center gap-2 font-display text-lg font-bold text-cream">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="h-6 w-6 text-amber" aria-hidden="true">
+                <circle cx="5.5" cy="17.5" r="3.5" />
+                <circle cx="18.5" cy="17.5" r="3.5" />
+                <path d="M15 6h3l3 6" />
+                <path d="m5.5 17.5 4-9h4l4 9" />
+              </svg>
+              Ridgeline Cycles
+            </div>
+            <p class="mt-3 max-w-xs text-sm text-cream/60">
+              Locally owned since 2009. Sales, service, and custom builds for every kind of rider.
+            </p>
+          </div>
+
+          <!-- Quick links -->
+          <nav aria-label="Footer navigation">
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-cream">Explore</h2>
+            <ul class="mt-4 space-y-2 text-sm">
+              <li><a class="footer-link" href="#services">Services</a></li>
+              <li><a class="footer-link" href="#pricing">Pricing</a></li>
+              <li><a class="footer-link" href="#about">About</a></li>
+              <li><a class="footer-link" href="#faq">FAQ</a></li>
+              <li><a class="footer-link" href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+
+          <!-- Contact summary -->
+          <div>
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-cream">Visit / Call</h2>
+            <ul class="mt-4 space-y-2 text-sm">
+              <li>
+                <a
+                  class="footer-link"
+                  href="https://www.google.com/maps/search/?api=1&query=42+Maple+Street+Riverton"
+                  target="_blank"
+                  rel="noopener"
+                >42 Maple Street, Riverton</a>
+              </li>
+              <li><a class="footer-link" href="tel:+15552471042">(555) 247-1042</a></li>
+              <li class="text-cream/60">Tue–Fri 9–18 · Sat 9–16</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-12 flex flex-col items-center justify-between gap-6 border-t border-cream/10 pt-6 md:flex-row">
+          <p class="text-sm text-cream/60">© <span id="year"></span> Ridgeline Cycles. All rights reserved.</p>
+          <ul class="flex items-center gap-5">
+            <li>
+              <a href="#" aria-label="Instagram" class="social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round" class="h-5 w-5">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="Facebook" class="social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                  class="h-5 w-5">
+                  <path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.5-2 2-2h2v-3.5C16.5 2 15 2 14 2c-3 0-5 1.8-5 5v3H6v4h3v8h4Z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="Strava" class="social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                  class="h-5 w-5">
+                  <path d="M10 2 4 14h4l2-4 2 4h4L10 2Zm5 13-2 4-2-4H8l5 7 5-7h-3Z" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Mobile-only sticky CTA bar -->
+    <div id="mobile-cta" class="mobile-cta">
+      <a href="tel:+15552471042" class="mobile-cta__call" aria-label="Call Ridgeline Cycles">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" class="h-5 w-5">
+          <path d="M22 16.92V21a1 1 0 0 1-1.11 1A19 19 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7.21 10.79a16 16 0 0 0 6 6l2.04-1.61a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1Z" />
+        </svg>
+        Call
+      </a>
+      <a href="#contact" class="mobile-cta__book">Book a Service</a>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

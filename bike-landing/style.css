@@ -1,0 +1,665 @@
+/* ------- Base ------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ------- Accessibility ------- */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  background-color: #1b4332;
+  color: #f8f4ef;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid #e9a825;
+  outline-offset: 2px;
+}
+
+/* Visible keyboard focus across interactive elements */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #e9a825;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ------- Nav ------- */
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  color: #2c2c2c;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #2d6a4f;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #2d6a4f;
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  width: 100%;
+}
+
+.mobile-link {
+  display: block;
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.75rem;
+  font-weight: 500;
+  color: #2c2c2c;
+}
+
+.mobile-link:hover {
+  background-color: rgba(45, 106, 79, 0.08);
+  color: #2d6a4f;
+}
+
+#site-header.is-scrolled {
+  border-color: rgba(44, 44, 44, 0.08);
+  box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.15);
+}
+
+/* ------- Hero -------
+   Background-image moved to a real <img srcset> in the markup so the
+   browser picks the right size per viewport. background-color stays as a
+   fallback while the photo loads (or if it never does). */
+.hero {
+  background-color: #1b4332;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero__overlay {
+  background: linear-gradient(
+    100deg,
+    rgba(27, 67, 50, 0.85) 0%,
+    rgba(27, 67, 50, 0.55) 55%,
+    rgba(27, 67, 50, 0.25) 100%
+  );
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 78vh;
+  }
+  .hero__overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(27, 67, 50, 0.85) 0%,
+      rgba(27, 67, 50, 0.65) 100%
+    );
+  }
+}
+
+/* ------- Service cards ------- */
+.service-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid rgba(44, 44, 44, 0.06);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -18px rgba(45, 106, 79, 0.35);
+  border-color: rgba(45, 106, 79, 0.25);
+}
+
+.service-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  background-color: rgba(45, 106, 79, 0.1);
+  color: #2d6a4f;
+  margin-bottom: 1.25rem;
+}
+
+.service-card__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.service-card__title {
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1b4332;
+}
+
+.service-card__body {
+  margin-top: 0.5rem;
+  color: rgba(44, 44, 44, 0.75);
+  line-height: 1.6;
+}
+
+/* ------- Pricing ------- */
+.pricing-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid rgba(44, 44, 44, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card--featured {
+  border-color: #2d6a4f;
+  box-shadow: 0 24px 48px -24px rgba(45, 106, 79, 0.45);
+  transform: translateY(-4px);
+}
+
+.pricing-card__badge {
+  position: absolute;
+  top: -0.75rem;
+  right: 1.25rem;
+  background-color: #e9a825;
+  color: #2c2c2c;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+}
+
+.pricing-card__title {
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1b4332;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pricing-card__price {
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #2c2c2c;
+  margin-top: 0.5rem;
+  line-height: 1;
+}
+
+.pricing-card__sub {
+  font-size: 0.85rem;
+  color: rgba(44, 44, 44, 0.6);
+  margin-top: 0.4rem;
+}
+
+.pricing-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  color: rgba(44, 44, 44, 0.85);
+  font-size: 0.95rem;
+}
+
+.pricing-card__list li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.pricing-card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  width: 0.85rem;
+  height: 0.5rem;
+  border-left: 2px solid #2d6a4f;
+  border-bottom: 2px solid #2d6a4f;
+  transform: rotate(-45deg);
+}
+
+.pricing-card__cta {
+  margin-top: auto;
+  display: block;
+  text-align: center;
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1b4332;
+  background-color: transparent;
+  border: 1.5px solid #2d6a4f;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+}
+
+.pricing-card__cta:hover {
+  background-color: #2d6a4f;
+  color: #f8f4ef;
+}
+
+.pricing-card__cta--primary {
+  background-color: #2d6a4f;
+  color: #f8f4ef;
+}
+
+.pricing-card__cta--primary:hover {
+  background-color: #1b4332;
+}
+
+/* ------- FAQ ------- */
+.faq-item {
+  background-color: #ffffff;
+  border: 1px solid rgba(44, 44, 44, 0.08);
+  border-radius: 0.85rem;
+  padding: 0.25rem 1.25rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-item[open] {
+  border-color: rgba(45, 106, 79, 0.3);
+  box-shadow: 0 10px 20px -16px rgba(45, 106, 79, 0.4);
+}
+
+.faq-item__q {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 2rem 1rem 0;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 600;
+  color: #1b4332;
+  font-size: 1.05rem;
+}
+
+.faq-item__q::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item__q::after {
+  content: "+";
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #2d6a4f;
+  line-height: 1;
+}
+
+.faq-item[open] .faq-item__q::after {
+  content: "−";
+}
+
+.faq-item__a {
+  padding: 0 0 1.1rem;
+  color: rgba(44, 44, 44, 0.78);
+  line-height: 1.6;
+}
+
+/* ------- Testimonials ------- */
+.testimonial-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid rgba(44, 44, 44, 0.06);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.testimonial-card__stars {
+  color: #e9a825;
+  letter-spacing: 2px;
+}
+
+/* ------- Contact ------- */
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background-color: rgba(233, 168, 37, 0.15);
+  color: #e9a825;
+  flex-shrink: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 0.4rem;
+}
+
+.form-input {
+  width: 100%;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(44, 44, 44, 0.18);
+  background-color: #ffffff;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.95rem;
+  color: #2c2c2c;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input::placeholder {
+  color: rgba(44, 44, 44, 0.4);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.18);
+}
+
+.form-input:invalid:not(:placeholder-shown) {
+  border-color: #c0392b;
+}
+
+/* ------- Contact list links ------- */
+.contact-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(248, 244, 239, 0.35);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-link:hover {
+  color: #e9a825;
+  border-bottom-color: #e9a825;
+}
+
+/* ------- Open / Closed status badge ------- */
+.open-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.open-status__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: currentColor;
+  box-shadow: 0 0 0 0 currentColor;
+}
+
+.open-status--open {
+  background-color: rgba(72, 187, 120, 0.18);
+  color: #48bb78;
+}
+
+.open-status--open .open-status__dot {
+  animation: pulse 1.8s ease-out infinite;
+}
+
+.open-status--closed {
+  background-color: rgba(248, 244, 239, 0.12);
+  color: rgba(248, 244, 239, 0.7);
+}
+
+.open-status--unknown {
+  background-color: rgba(248, 244, 239, 0.08);
+  color: rgba(248, 244, 239, 0.5);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(72, 187, 120, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(72, 187, 120, 0);
+  }
+}
+
+/* ------- Footer ------- */
+.footer-link {
+  color: rgba(248, 244, 239, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #e9a825;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background-color: rgba(248, 244, 239, 0.08);
+  color: #f8f4ef;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.social-link:hover {
+  background-color: #e9a825;
+  color: #2c2c2c;
+}
+
+/* ------- Sticky mobile CTA bar ------- */
+.mobile-cta {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    gap: 0.5rem;
+    padding: 0.6rem 0.8rem calc(0.6rem + env(safe-area-inset-bottom, 0px));
+    background-color: rgba(248, 244, 239, 0.97);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(44, 44, 44, 0.08);
+    box-shadow: 0 -8px 24px -16px rgba(0, 0, 0, 0.25);
+  }
+
+  .mobile-cta__call,
+  .mobile-cta__book {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    height: 3rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .mobile-cta__call {
+    flex: 0 0 35%;
+    background-color: #ffffff;
+    color: #1b4332;
+    border: 1px solid rgba(44, 44, 44, 0.12);
+  }
+
+  .mobile-cta__book {
+    flex: 1;
+    background-color: #2d6a4f;
+    color: #f8f4ef;
+    box-shadow: 0 10px 24px -10px rgba(45, 106, 79, 0.55);
+  }
+
+  /* Make sure the bar doesn't sit on top of the footer's bottom edge */
+  body {
+    padding-bottom: 4.5rem;
+  }
+}
+
+/* ------- Scroll reveal -------
+   Only hide reveal targets when JS is running. With JS off, the page
+   stays fully visible — main.js adds .js to <html> on startup. */
+[data-reveal] {
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+html.js [data-reveal]:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* No-JS fallbacks for elements that rely on JS to function */
+@media (max-width: 767px) {
+  html:not(.js) #mobile-menu {
+    display: block !important;
+  }
+}
+
+html:not(.js) #open-status,
+html:not(.js) #nav-toggle {
+  display: none !important;
+}
+
+/* ------- Motion ------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------- Print ------- */
+@media print {
+  /* Ink-friendly defaults */
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+  }
+
+  /* Strip interactive / decorative chrome */
+  #site-header,
+  #mobile-cta,
+  .skip-link,
+  #contact-form,
+  #open-status,
+  .social-link {
+    display: none !important;
+  }
+
+  /* Reveal everything */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Kill effects that waste ink */
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Hero: collapse to a plain heading instead of a full-bleed banner */
+  .hero {
+    min-height: auto !important;
+    padding: 0 !important;
+    background: none !important;
+  }
+  .hero__overlay {
+    display: none !important;
+  }
+  .hero h1,
+  .hero p {
+    color: #000 !important;
+  }
+  .hero a,
+  .hero img {
+    display: none !important;
+  }
+
+  /* Dark sections become light for print */
+  .bg-forest-dark,
+  .bg-forest,
+  .bg-charcoal {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .bg-forest-dark *,
+  .bg-forest *,
+  .bg-charcoal * {
+    color: #000 !important;
+  }
+
+  /* Keep cards/FAQ items intact across page breaks */
+  .service-card,
+  .pricing-card,
+  .testimonial-card,
+  .faq-item,
+  figure {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid #ccc !important;
+    background: #fff !important;
+  }
+
+  /* main.js opens all <details> before print and restores after */
+  .faq-item__q::after {
+    display: none;
+  }
+
+  /* Annotate web URLs after their link text so the printout is useful */
+  a[href^="http"]:not(.nav-link):not([href^="#"])::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+  }
+}
